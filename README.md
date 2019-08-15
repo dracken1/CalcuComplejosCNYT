@@ -31,6 +31,10 @@
 		assertTrue(c1.equals(c2));
 	}
   ```
+  
+# Getting Started
+Si usted desea probar este sencillo programa, lo unico que debe hacer es clonar el repositorio en una carpeta de su eleccion y abrir dicha carpeta en eclipse, posteriormente solo use la opcion de correr/ejecutar que da eclipse.
+Adicionalmente esto se puede realizar usando la consola.
 
 # Build with
 El proyecto se desarrollo usando el lenguaje Java y la herramienta Eclipse.
