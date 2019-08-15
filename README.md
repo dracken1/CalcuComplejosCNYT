@@ -1,7 +1,7 @@
 # CalcuComplejosCNYT
   CalcuComplejosCNYT fue desarrollado como laboratorio de la clase CNYT de la Escuela Colombiana de Ingenieria Julio Garavito.
 
-- Se creo una calculadora de numeros complejos que pudiera desarrollar las siguientes operaciones:
+- Se creo una calculadora de numeros complejos que pudiera completar las siguientes operaciones:
   1. Suma
   2. Resta
   3. Multiplicacion
