@@ -59,4 +59,22 @@ class PruebasCalcu {
 		assertEquals(var[0], res[0]);
 		assertEquals(var[1], res[1]);
 	}
+	
+	@Test
+	void deberiaConvertirPolarACartesiano() {
+		double[] var = new double[2];
+		double[] res = m.conversionPaC(new Complejo(7, 11));
+		//n complejo expresado en polares: [13.038404810405298,57.528807709151515] 
+		var[0] = 13.038404810405298*Math.cos(57.528807709151515); 
+		var[1] = 13.038404810405298*Math.sin(57.528807709151515);		
+		assertEquals(var[0], res[0]);
+		assertEquals(var[1], res[1]);
+	}
+	
+	@Test
+	void deberiaSacarConjugado() {
+		//Complejo: (11,-25) => (11 - 25i), Conjugado: (11, 25) => (11 + 25i)
+		Complejo exp = new Complejo(11, 25);
+		assertTrue(exp.equals(m.conjugadoQC(new Complejo(11, -25))));
+	}
 }

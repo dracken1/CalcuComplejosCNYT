@@ -31,7 +31,7 @@ public class Mathemataising {
 		double resPtReal = sPtReal + sPtImaNuevoReal;
 		double resPtIma = (n1.parteReal * n2.parteImag) + (n1.parteImag * n2.parteReal);
 		if(resPtReal == 0  ) {
-			System.out.println("( " + resPtIma +" )");
+			System.out.println("( " + resPtIma +"i )");
 			Complejo resultado = new Complejo(0, resPtIma);
 			return resultado;
 		}
@@ -65,12 +65,12 @@ public class Mathemataising {
 	}	
 	
 	public double faseQC(Complejo n1) {
-		System.out.println(Math.toDegrees(Math.atan(n1.parteImag/n1.parteReal)));
+		System.out.println("fase: " + Math.toDegrees(Math.atan(n1.parteImag/n1.parteReal)));
 		return Math.toDegrees(Math.atan(n1.parteImag/n1.parteReal));
 	}
 	
 	public double moduloQC(Complejo n1) {	
-		System.out.println(Math.sqrt(n1.parteReal*n1.parteReal+n1.parteImag*n1.parteImag));
+		System.out.println("modulo: "+Math.sqrt(n1.parteReal*n1.parteReal+n1.parteImag*n1.parteImag));
 		return Math.sqrt(n1.parteReal*n1.parteReal+n1.parteImag*n1.parteImag);
 	}
 	
@@ -81,14 +81,27 @@ public class Mathemataising {
 		return var;
 	}	
 	
+	public double[] conversionPaC(Complejo n1) {
+		double[] var = new double[2];
+		var[0] = moduloQC(n1)*Math.cos(faseQC(n1));
+		var[1] = moduloQC(n1)*Math.sin(faseQC(n1));		
+		return var;
+	}
+	
 	
 	public static void main(String[] args) {
 		Mathemataising calcu = new Mathemataising();
 		//calcu.multiplacionQC(new Complejo(5, 4),new Complejo(3, 7));
 		//calcu.divisionQC(new Complejo(6, -1),new Complejo(-3,4));		
 		calcu.faseQC(new Complejo(7, 11));
-		System.out.println((double)Math.toDegrees(Math.atan((double)11/(double)7)));
-		//calcu.moduloQC(new Complejo(7, 11));
+		//System.out.println((double)Math.toDegrees(Math.atan((double)11/(double)7)));
+		calcu.moduloQC(new Complejo(7, 11));
+//		Complejo var = new Complejo(0, 2);
+//		for (int i=1;i<=6;i++) {
+//			var= calcu.multiplacionQC(var, new Complejo(0,2));			
+//		}
+//		System.out.println("res: "+var);
 	}	
+		
 
 }
