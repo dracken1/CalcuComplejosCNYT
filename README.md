@@ -2,6 +2,7 @@
   CalcuComplejosCNYT fue desarrollado como laboratorio de la clase CNYT de la Escuela Colombiana de Ingenieria Julio Garavito.
 
 - Se creo una calculadora de numeros complejos que pudiera completar las siguientes operaciones:
+````
   1. Suma
   2. Resta
   3. Multiplicacion
@@ -10,7 +11,8 @@
   6. Fase
   7. Conjugado
   8. Conversion de coordenadas cartesianas a polares
-  
+````
+
 # Example
   ```
   public Complejo sumaQC(Complejo n1, Complejo n2) {
@@ -43,7 +45,11 @@ El proyecto se desarrollo usando el lenguaje Java y la herramienta Eclipse.
 Nicolás Cárdenas Chaparro
 
 # License
-Free license
+````
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+````
 
 # Acknowlegdments
 - Practicing java
