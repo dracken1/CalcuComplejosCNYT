@@ -90,12 +90,12 @@ public class Mathemataising {
 	
 	
 	public static void main(String[] args) {
-		Mathemataising calcu = new Mathemataising();
+		//Mathemataising calcu = new Mathemataising();
 		//calcu.multiplacionQC(new Complejo(5, 4),new Complejo(3, 7));
 		//calcu.divisionQC(new Complejo(6, -1),new Complejo(-3,4));		
-		calcu.faseQC(new Complejo(7, 11));
+		//calcu.faseQC(new Complejo(7, 11));
 		//System.out.println((double)Math.toDegrees(Math.atan((double)11/(double)7)));
-		calcu.moduloQC(new Complejo(7, 11));
+		//calcu.moduloQC(new Complejo(7, 11));
 //		Complejo var = new Complejo(0, 2);
 //		for (int i=1;i<=6;i++) {
 //			var= calcu.multiplacionQC(var, new Complejo(0,2));			
