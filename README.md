@@ -56,7 +56,7 @@
 git clone https://github.com/dracken1/CalcuComplejosCNYT.git
 ```
 
-## Compile and run with
+## Run with
 
 Dentro de la carpeta CalcuComplejosCNYT, inice cmd e intrduzca los siguientes comandos:
 
@@ -66,6 +66,12 @@ mvn clean
 mvn compile
 
 mvn test
+```
+
+o tabmien:
+
+```
+mvn package
 ```
 
 # Build with
