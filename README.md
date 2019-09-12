@@ -3,14 +3,29 @@
 
 - Se creo una calculadora de numeros complejos que pudiera completar las siguientes operaciones:
 ````
-  1. Suma
-  2. Resta
-  3. Multiplicacion
-  4. Division
-  5. Modulo
-  6. Fase
-  7. Conjugado
-  8. Conversion de coordenadas cartesianas a polares
+	1. Suma
+  	2. Resta
+  	3. Multiplicacion
+  	4. Division
+  	5. Modulo
+  	6. Fase
+  	7. Conjugado
+  	8. Conversion de coordenadas cartesianas a polares
+  	9. Adición de vectores complejos.
+  	10. Inversa de vectores complejos.
+	11. Multiplicación escalar de vectores complejos.
+	12. Adición de matrices complejos.
+	13. Inversa de matrices complejos.
+	14. Multiplicación escalar de matrices complejas.
+	15. Matriz transpuesta
+	16. Matriz conjugada
+	17. Matriz adjunta
+	18. Función para calcular la "acción" de una matriz sobre un vector.
+	19. Norma de matrices
+	20. Distancia entrematrices
+	22. Revisar si es unitaria
+	24. Revisar si es Hermitian
+	25. Producto tensor.
 ````
 
 # Example
@@ -35,8 +50,21 @@
   ```
   
 # Getting Started
-Si usted desea probar este sencillo programa, lo unico que debe hacer es clonar el repositorio en una carpeta de su eleccion y abrir dicha carpeta en eclipse, posteriormente solo use la opcion de correr/ejecutar que da eclipse.
-Adicionalmente esto se puede realizar usando la consola.
+## Instal with
+
+```
+git clone https://github.com/dracken1/CalcuComplejosCNYT.git
+```
+
+## Compile and run with
+
+Dentro de la carpeta CalcuComplejosCNYT, inice cmd e intrduzca los siguientes comandos:
+
+```
+mvn compile
+
+mvn test
+```
 
 # Build with
 El proyecto se desarrollo usando el lenguaje Java y la herramienta Eclipse.
