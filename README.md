@@ -50,7 +50,7 @@
   ```
   
 # Getting Started
-## Instal with
+## Install with
 
 ```
 git clone https://github.com/dracken1/CalcuComplejosCNYT.git
@@ -61,6 +61,8 @@ git clone https://github.com/dracken1/CalcuComplejosCNYT.git
 Dentro de la carpeta CalcuComplejosCNYT, inice cmd e intrduzca los siguientes comandos:
 
 ```
+mvn clean
+
 mvn compile
 
 mvn test
