@@ -14,22 +14,11 @@ public class ComplexMatrix {
     }
 
 
-    /**
-     * Put a complez number to a position
-     * @param i
-     * @param j
-     * @param c
-     */
+
     public void put(int i, int j, ComplexNumber c){
         matrix[i][j] = c;
     }
 
-    /**
-     * Sums the matrix with another
-     * @param complexMatrix the other complex matrix
-     * @return a new complex matrix
-     * @throws ComplexException
-     */
     public ComplexMatrix sum(ComplexMatrix complexMatrix) throws ComplexException {
         if(matrix.length != complexMatrix.getMatrix().length || matrix[0].length != complexMatrix.getMatrix()[0].length){
             throw new ComplexException(ComplexException.BADSIZE);
@@ -43,12 +32,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * Rests the matrix with another
-     * @param complexMatrix the other matrix
-     * @return a new Complex Matrix
-     * @throws ComplexException
-     */
     public ComplexMatrix rest(ComplexMatrix complexMatrix) throws ComplexException {
         if(matrix.length != complexMatrix.getMatrix().length || matrix[0].length != complexMatrix.getMatrix()[0].length){
             throw new ComplexException(ComplexException.BADSIZE);
@@ -62,12 +45,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * Multiplys with another matrix
-     * @param complexMatrix the other matrix
-     * @return a new complex matrix
-     * @throws ComplexException
-     */
     public ComplexMatrix multiply(ComplexMatrix complexMatrix) throws ComplexException {
         if(matrix[0].length != complexMatrix.getMatrix().length) throw new ComplexException(ComplexException.BADSIZE);
         ComplexNumber[][] resultado = new ComplexNumber[matrix.length][complexMatrix.getMatrix()[0].length];
@@ -83,11 +60,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * Multiplys the matrix with
-     * @param complexNumber
-     * @return
-     */
     public ComplexMatrix multiplyEscalar(ComplexNumber complexNumber){
         ComplexNumber[][] resultado = new ComplexNumber[matrix.length][matrix[0].length];
         for(int i = 0; i<matrix.length;i++){
@@ -98,10 +70,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * The transpose of the matrix
-     * @return a new matrix
-     */
     public ComplexMatrix traspose(){
         ComplexNumber[][] resultado = new ComplexNumber[matrix[0].length][matrix.length];
         for(int i = 0; i< matrix.length; i++){
@@ -112,10 +80,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * The conjugate of the matrix
-     * @return a new matrix
-     */
     public ComplexMatrix conjugate(){
         ComplexNumber[][] resultado = new ComplexNumber[matrix.length][matrix[0].length];
         for(int i = 0; i< matrix.length; i++){
@@ -126,18 +90,10 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * The adjoint of the matrix
-     * @return a new matrix
-     */
     public ComplexMatrix adjoint(){
         return this.traspose().conjugate();
     }
 
-    /**
-     * The negative of the matrix
-     * @return a new matrix
-     */
     public ComplexMatrix negative(){
         ComplexNumber[][] resultado = new ComplexNumber[matrix.length][matrix[0].length];
         for(int i = 0; i< matrix.length; i++){
@@ -148,12 +104,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * The inner product of the matrix with another
-     * @param complexMatrix the other matrix
-     * @return a new matrix
-     * @throws ComplexException
-     */
     public ComplexNumber innerProduct(ComplexMatrix complexMatrix) throws ComplexException {
         if(matrix.length != complexMatrix.getMatrix().length || matrix[0].length != complexMatrix.getMatrix()[0].length)
             throw new ComplexException(ComplexException.BADSIZE);
@@ -166,11 +116,6 @@ public class ComplexMatrix {
         return temp;
     }
 
-    /**
-     * The tensor product of the matrz with another matrix
-     * @param complexMatrix the other matrix
-     * @return a new matrix
-     */
     public ComplexMatrix tensor(ComplexMatrix complexMatrix){
         ComplexNumber[][] resultado = new ComplexNumber[matrix.length* complexMatrix.getMatrix().length]
                 [matrix[0].length* complexMatrix.getMatrix()[0].length];
@@ -187,10 +132,6 @@ public class ComplexMatrix {
         return new ComplexMatrix(resultado);
     }
 
-    /**
-     * The norm of the matrix
-     * @return a new complex number
-     */
     public Double norm(){
         Double temp = 0.0;
         for(int i = 0; i < matrix.length; i++){
@@ -202,22 +143,11 @@ public class ComplexMatrix {
         return  Math.sqrt(temp);
     }
 
-    /**
-     * The distance between the vector an aonother
-     * NOTE: both MUST be vectors
-     * @param complexMatrix the other vector
-     * @return a new complex number
-     * @throws ComplexException
-     */
     public Double distance(ComplexMatrix complexMatrix) throws ComplexException {
         if(matrix.length != 1 || complexMatrix.getMatrix().length != 1) throw new ComplexException(ComplexException.BADSIZE);
         return this.rest(complexMatrix).norm();
     }
 
-    /**
-     * Says if the matrix is hermitian
-     * @return
-     */
     public boolean isHermitian(){
         if(this.equals(this.adjoint())){
             return true;
@@ -226,11 +156,6 @@ public class ComplexMatrix {
         }
     }
 
-    /**
-     * Says if the matris is unitary
-     * @return
-     * @throws ComplexException
-     */
     public boolean isUnitary() throws ComplexException {
         if(matrix.length != matrix[0].length) throw new ComplexException(ComplexException.BADSIZE);
         ComplexNumber[][] tempMatrix = new ComplexNumber[matrix.length][matrix.length];
@@ -257,43 +182,20 @@ public class ComplexMatrix {
         return bol;
     }
 
-    /**
-     * Calculates the probability that a particle is find in a position given a Complex vector
-     * @param n
-     * @return
-     * @throws ComplexException
-     */
     public double calculateProbabilityInAPosition(int n) throws ComplexException {
         if(matrix.length>1) throw new ComplexException(ComplexException.BADSIZE);
         return Math.pow(matrix[0][n].norm()/this.norm(),2);
     }
 
-    /**
-     * Calculates the bra of a vector
-     * @return
-     * @throws ComplexException
-     */
     public ComplexMatrix bra() throws ComplexException {
         return this.adjoint();
     }
 
-    /**
-     * Calculates the amplitude of transition
-     * @param complexMatrix
-     * @return
-     * @throws ComplexException
-     */
     public ComplexNumber amplitudeTransition(ComplexMatrix complexMatrix) throws ComplexException {
         if(complexMatrix.getMatrix().length>1) throw new ComplexException(ComplexException.BADSIZE);
         return this.bra().innerProduct(complexMatrix);
     }
 
-    /**
-     * gets the varience between two hermetian matrices
-     * @param complexMatrix
-     * @return
-     * @throws ComplexException
-     */
     public ComplexNumber varience(ComplexMatrix complexMatrix) throws ComplexException {
         if(!isHermitian()){
             return null;
@@ -313,12 +215,6 @@ public class ComplexMatrix {
         }
     }
 
-    /**
-     * gets the mean between two hemritian matrices
-     * @param complexMatrix
-     * @return
-     * @throws ComplexException
-     */
     public ComplexNumber mean(ComplexMatrix complexMatrix) throws ComplexException {
         return multiply(complexMatrix).bra().multiply(complexMatrix).getMatrix()[0][0];
     }
@@ -335,13 +231,6 @@ public class ComplexMatrix {
         }
     }
 
-    /**
-     * verifys the complex matrices if their are hermitian and the vector if its the right size
-     * @param complexMatrices
-     * @param vector
-     * @return
-     * @throws ComplexException
-     */
     private static boolean verifySizesOrbit(ArrayList<ComplexMatrix> complexMatrices, ComplexMatrix vector) throws ComplexException {
         boolean bol = true;
         int size = complexMatrices.get(0).getMatrix().length;

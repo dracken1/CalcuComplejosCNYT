@@ -224,10 +224,7 @@ public class CalcuTest {
         CalcuComplejos t7 = new CalcuComplejos(4,0);
         CalcuComplejos t8 = new CalcuComplejos(0,-1);
         CalcuComplejos t9 = new CalcuComplejos(1,0);
-        assertTrue(new CalcuMsComplejas(new CalcuComplejos[][]{{t1,t2,t3},
-                                                            {t4,t5,t6},
-                                                            {t7,t8,t9}})
-                .Hermitian());
+        assertTrue(new CalcuMsComplejas(new CalcuComplejos[][]{{t1,t2,t3},{t4,t5,t6},{t7,t8,t9}}).Hermitian());
     }
 
     @Test
@@ -237,6 +234,8 @@ public class CalcuTest {
         CalcuMsComplejas complexMatrix = new CalcuMsComplejas(new CalcuComplejos[][]{{t1,t2},{t2,t1}});
         assertTrue(complexMatrix.productoEscalar(new CalcuComplejos(1.0/2.0,0)).isUnitary());
     }
+
+    // Pruebas retos de programacion
 
     @Test
     public void deterministicTest() throws ComplexException {
@@ -452,7 +451,7 @@ public class CalcuTest {
         }
         ComplexMatrix expectedMatrix = new ComplexMatrix(expected);
         assertTrue(result.multiply(result).multiply(result).equals(expectedMatrix));
-    }
+}
 
     @Test
     public void probabilityInAPosition() throws ComplexException {
@@ -461,7 +460,7 @@ public class CalcuTest {
         matrix[0][1] = ComplexNumber.newComplexNumberAlgebraicForm(0,-2);
         matrix[0][2] = ComplexNumber.newComplexNumberAlgebraicForm(0,1);
         matrix[0][3] = ComplexNumber.newComplexNumberAlgebraicForm(2,0);
-        assertEquals(new ComplexMatrix(matrix).calculateProbabilityInAPosition(2),0.05263157894736841);
+        assertEquals(new ComplexMatrix(matrix).calculateProbabilityInAPosition(2),0.05263157894736841,0.00001);
     }
 
     @Test
