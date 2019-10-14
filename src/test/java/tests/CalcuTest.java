@@ -3,8 +3,9 @@ package tests;
 import static org.junit.Assert.*;
 
 import Aplicacion.ComplexException;
-import Aplicacion.ComplexMatrix;
-import Aplicacion.ComplexNumber;
+import Aplicacion.EjemplosMatriz;
+import Aplicacion.MatrizCompleja;
+import Aplicacion.NumeroComplejo;
 import org.junit.Test;
 
 
@@ -234,248 +235,83 @@ public class CalcuTest {
         CalcuMsComplejas complexMatrix = new CalcuMsComplejas(new CalcuComplejos[][]{{t1,t2},{t2,t1}});
         assertTrue(complexMatrix.productoEscalar(new CalcuComplejos(1.0/2.0,0)).isUnitary());
     }
-
+    ////////////////////////////////
     // Pruebas retos de programacion
 
+
     @Test
-    public void deterministicTest() throws ComplexException {
-        ComplexNumber[][] matrix = new ComplexNumber[6][6];
-        for(int i = 0; i<6;i++){
-            for(int j = 0; j<6;j++){
-                ComplexNumber temp;
-                if((i==2 && j==1) || (i==2 && j==5) || (i==3 && j==3) || (i==4 && j==2) || (i==5 && j==0) || (i==5 && j==4))
-                    temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-                else temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-                matrix[i][j] = temp;
-            }
+    public void pruebaBalas() throws ComplexException {
+
+        NumeroComplejo[][] ma = new NumeroComplejo[8][1];
+        for(int i = 0; i<8;i++){
+            NumeroComplejo temp;
+            if (i==0) temp = NumeroComplejo.newComplexNumberAlgebraicForm(1,0);
+            else temp = NumeroComplejo.newComplexNumberAlgebraicForm(0,0);
+            ma[i][0] = temp;
         }
-        ComplexMatrix complexMatrix = new ComplexMatrix(matrix);
-        ComplexNumber[][] matrixX = new ComplexNumber[6][1];
-        matrixX[0][0] = ComplexNumber.newComplexNumberAlgebraicForm(6,0);
-        matrixX[1][0] = ComplexNumber.newComplexNumberAlgebraicForm(2,0);
-        matrixX[2][0] = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-        matrixX[3][0] = ComplexNumber.newComplexNumberAlgebraicForm(5,0);
-        matrixX[4][0] = ComplexNumber.newComplexNumberAlgebraicForm(3,0);
-        matrixX[5][0] = ComplexNumber.newComplexNumberAlgebraicForm(10,0);
-        ComplexMatrix X = new ComplexMatrix(matrixX);
-        ComplexNumber[][] matrixTest = new ComplexNumber[6][1];
-        matrixTest[0][0] = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-        matrixTest[1][0] = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-        matrixTest[2][0] = ComplexNumber.newComplexNumberAlgebraicForm(12,0);
-        matrixTest[3][0] = ComplexNumber.newComplexNumberAlgebraicForm(5,0);
-        matrixTest[4][0] = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-        matrixTest[5][0] = ComplexNumber.newComplexNumberAlgebraicForm(9,0);
-        ComplexMatrix test = new ComplexMatrix(matrixTest);
-        assertTrue(complexMatrix.multiply(X).equals(test));
+        EjemplosMatriz eje = new EjemplosMatriz();
+        MatrizCompleja X = new MatrizCompleja(ma);
+        MatrizCompleja macom = eje.getMatrizPruebaBalas();
+        MatrizCompleja matrixTest = eje.getMatrizEsperadaPruebaBalas();
+        assertTrue(macom.multiply(macom).multiply(X).equals(matrixTest));
+
     }
 
     @Test
-    public void BulletTest() throws ComplexException {
-        ComplexNumber[][] matrix = new ComplexNumber[8][8];
-        for(int i = 0; i<8; i++){
-            for(int j = 0;j<8;j++){
-                ComplexNumber temp;
-                if((i==1 && j==0)||(i==2 && j==0)) temp = ComplexNumber.newComplexNumberAlgebraicForm(1.0/2.0,0);
-                else if((i==3 && j==1) || (i==4 && j==1) || (i==5 && j==1) || (i==5 && j==2) || (i==6 && j==2) || (i==7 && j==2))
-                    temp = ComplexNumber.newComplexNumberAlgebraicForm(1.0/3.0,0);
-                else if(i>2 && j>2 && i==j) temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-                else temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-                matrix[i][j] = temp;
-            }
-        }
-        ComplexMatrix complexMatrix = new ComplexMatrix(matrix);
-        ComplexNumber[][] matrixX = new ComplexNumber[8][1];
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if (i==0) temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            else temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            matrixX[i][0] = temp;
-        }
-        ComplexMatrix X = new ComplexMatrix(matrixX);
-        ComplexNumber[][] test = new ComplexNumber[8][1];
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if(i==3 || i==4 || i==6 || i==7) temp = ComplexNumber.newComplexNumberAlgebraicForm(1.0/6.0,0);
-            else if(i == 5) temp = ComplexNumber.newComplexNumberAlgebraicForm(1.0/3.0,0);
-            else temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            test[i][0] = temp;
-        }
-        ComplexMatrix matrixTest = new ComplexMatrix(test);
-        assertTrue(complexMatrix.multiply(complexMatrix).multiply(X).equals(matrixTest));
+    public void pruebaDobleRendija() throws ComplexException {
+        EjemplosMatriz eje = new EjemplosMatriz();
+        // Matriz a comparar
+        MatrizCompleja result = eje.getEjemploMatrizCompleja();
+        // Matriz esperada
+        MatrizCompleja maesperada = eje.getMatrizEsperada();
+        assertTrue(result.multiply(result).multiply(result).equals(maesperada));
     }
 
     @Test
-    public void doubleSlit() throws ComplexException {
-        ComplexNumber[][] matrix = new ComplexNumber[8][8];
-        for(int i = 0; i<8;i++){
-            matrix[0][i]=ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-        }
-        matrix[1][0] = ComplexNumber.newComplexNumberAlgebraicForm(1.0/Math.sqrt(2),0);
-        for(int i = 1; i<8;i++) {
-            matrix[1][i] = ComplexNumber.newComplexNumberAlgebraicForm(0, 0);
-        }
-        matrix[2][0] = ComplexNumber.newComplexNumberAlgebraicForm(1.0/Math.sqrt(2),0);
-        for(int i = 1; i<8;i++) {
-            matrix[2][i] = ComplexNumber.newComplexNumberAlgebraicForm(0, 0);
-        }
-        for(int i = 0;i<8;i++){
-            ComplexNumber temp;
-            if(i==1) {
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1.0, 1).multiplyEscalar(1.0 / Math.sqrt(6));
-            }else if(i==3){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            matrix[3][i] = temp;
-        }
-        for(int i = 0;i<8;i++){
-            ComplexNumber temp;
-            if(i==1) {
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1.0, -1.0).multiplyEscalar(1.0 / Math.sqrt(6));
-            }else if(i==4){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            matrix[4][i] = temp;
-        }
-        for(int i = 0;i<8;i++){
-            ComplexNumber temp;
-            if(i==1) {
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1.0, -1.0).multiplyEscalar(1.0 / Math.sqrt(6));
-            }else if(i==2){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1.0, 1.0).multiplyEscalar(1.0 / Math.sqrt(6));
-            }else if(i==5){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            matrix[5][i] = temp;
-        }
-        for(int i = 0;i<8;i++){
-            ComplexNumber temp;
-            if(i==2) {
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1.0, -1.0).multiplyEscalar(1.0 / Math.sqrt(6));
-            }else if(i==6){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            matrix[6][i] = temp;
-        }
-        for(int i = 0;i<8;i++){
-            ComplexNumber temp;
-            if(i==2) {
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1.0, -1.0).multiplyEscalar(1.0 / Math.sqrt(6));
-            }else if(i==7){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            matrix[7][i] = temp;
-        }
-        ComplexMatrix result = new ComplexMatrix(matrix);
-
-        //EXPECTED
-        ComplexNumber[][] expected = new ComplexNumber[8][8];
-        for(int i = 0; i<3;i++){
-            for(int j = 0; j<8;j++){
-                expected[i][j]=ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-        }
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if(i==0){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,1).multiplyEscalar(1.0/Math.sqrt(12));
-            }else if(i==1){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,1).multiplyEscalar(1.0/Math.sqrt(6));
-            }else if(i==3){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            expected[3][i] = temp;
-        }
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if(i==0){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,-1).multiplyEscalar(1.0/Math.sqrt(12));
-            }else if(i==1){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,-1).multiplyEscalar(1.0/Math.sqrt(6));
-            }else if(i==4){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            expected[4][i] = temp;
-        }
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if(i==1){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,-1).multiplyEscalar(1.0/Math.sqrt(6));
-            }else if(i==2){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,1).multiplyEscalar(1.0/Math.sqrt(6));
-            }else if(i==5){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            expected[5][i] = temp;
-        }
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if(i==0){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,-1).multiplyEscalar(1.0/Math.sqrt(12));
-            }else if(i==2){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(-1,-1).multiplyEscalar(1.0/Math.sqrt(6));
-            }else if(i==6){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            expected[6][i] = temp;
-        }
-        for(int i = 0; i<8;i++){
-            ComplexNumber temp;
-            if(i==0){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,-1).multiplyEscalar(1.0/Math.sqrt(12));
-            }else if(i==2){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,-1).multiplyEscalar(1.0/Math.sqrt(6));
-            }else if(i==7){
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-            }else{
-                temp = ComplexNumber.newComplexNumberAlgebraicForm(0,0);
-            }
-            expected[7][i] = temp;
-        }
-        ComplexMatrix expectedMatrix = new ComplexMatrix(expected);
-        assertTrue(result.multiply(result).multiply(result).equals(expectedMatrix));
-}
-
-    @Test
-    public void probabilityInAPosition() throws ComplexException {
-        ComplexNumber[][] matrix = new ComplexNumber[1][4];
-        matrix[0][0] = ComplexNumber.newComplexNumberAlgebraicForm(-3,-1);
-        matrix[0][1] = ComplexNumber.newComplexNumberAlgebraicForm(0,-2);
-        matrix[0][2] = ComplexNumber.newComplexNumberAlgebraicForm(0,1);
-        matrix[0][3] = ComplexNumber.newComplexNumberAlgebraicForm(2,0);
-        assertEquals(new ComplexMatrix(matrix).calculateProbabilityInAPosition(2),0.05263157894736841,0.00001);
+    public void probabilidadEnUnaPosicion() throws ComplexException {
+        NumeroComplejo[][] ma = new NumeroComplejo[1][4];
+        ma[0][0] = NumeroComplejo.newComplexNumberAlgebraicForm(-3,-1);
+        ma[0][1] = NumeroComplejo.newComplexNumberAlgebraicForm(0,-2);
+        ma[0][2] = NumeroComplejo.newComplexNumberAlgebraicForm(0,1);
+        ma[0][3] = NumeroComplejo.newComplexNumberAlgebraicForm(2,0);
+        assertEquals(new MatrizCompleja(ma).calculateProbabilityInAPosition(2),0.05263157894736841,0.00001);
     }
 
     @Test
-    public void transition() throws ComplexException {
-        ComplexNumber[][] si = new ComplexNumber[1][2];
-        ComplexNumber[][] phi = new ComplexNumber[1][2];
-        si[0][0] = ComplexNumber.newComplexNumberAlgebraicForm(0,1);
-        si[0][1] = ComplexNumber.newComplexNumberAlgebraicForm(-1,0);
+    public void pruebaTransicion() throws ComplexException {
+        NumeroComplejo[][] si = new NumeroComplejo[1][2];
+        NumeroComplejo[][] phi = new NumeroComplejo[1][2];
+        si[0][0] = NumeroComplejo.newComplexNumberAlgebraicForm(0,1);
+        si[0][1] = NumeroComplejo.newComplexNumberAlgebraicForm(-1,0);
 
-        phi[0][0] = ComplexNumber.newComplexNumberAlgebraicForm(1,0);
-        phi[0][1] = ComplexNumber.newComplexNumberAlgebraicForm(0,1);
+        phi[0][0] = NumeroComplejo.newComplexNumberAlgebraicForm(1,0);
+        phi[0][1] = NumeroComplejo.newComplexNumberAlgebraicForm(0,1);
 
-        assertTrue(new ComplexMatrix(si).bra().traspose().multiplyEscalar(ComplexNumber.newComplexNumberAlgebraicForm(Math.sqrt(2)/2,0)).
-                innerProduct(new ComplexMatrix(phi).multiplyEscalar(ComplexNumber.newComplexNumberAlgebraicForm(Math.sqrt(2)/2,0))).equals(
-                ComplexNumber.newComplexNumberAlgebraicForm(0,-1.0000000000000002)));
+        assertTrue(new MatrizCompleja(si).bra().traspose().multiplyEscalar(NumeroComplejo.newComplexNumberAlgebraicForm(Math.sqrt(2)/2,0)).
+                innerProduct(new MatrizCompleja(phi).multiplyEscalar(NumeroComplejo.newComplexNumberAlgebraicForm(Math.sqrt(2)/2,0))).equals(
+                NumeroComplejo.newComplexNumberAlgebraicForm(0,-1.0000000000000002)));
     }
 
+    @Test
+    public void pruebaCoeficiente() throws ComplexException {
+        EjemplosMatriz eje = new EjemplosMatriz();
+        MatrizCompleja matrizCom = eje.getMatrizCoeficiente();
+        NumeroComplejo[][] max = new NumeroComplejo[6][1];
+        max[0][0] = NumeroComplejo.newComplexNumberAlgebraicForm(6,0);
+        max[1][0] = NumeroComplejo.newComplexNumberAlgebraicForm(2,0);
+        max[2][0] = NumeroComplejo.newComplexNumberAlgebraicForm(1,0);
+        max[3][0] = NumeroComplejo.newComplexNumberAlgebraicForm(5,0);
+        max[4][0] = NumeroComplejo.newComplexNumberAlgebraicForm(3,0);
+        max[5][0] = NumeroComplejo.newComplexNumberAlgebraicForm(10,0);
+        MatrizCompleja X = new MatrizCompleja(max);
+        NumeroComplejo[][] macomparar = new NumeroComplejo[6][1];
+        macomparar[0][0] = NumeroComplejo.newComplexNumberAlgebraicForm(0,0);
+        macomparar[1][0] = NumeroComplejo.newComplexNumberAlgebraicForm(0,0);
+        macomparar[2][0] = NumeroComplejo.newComplexNumberAlgebraicForm(12,0);
+        macomparar[3][0] = NumeroComplejo.newComplexNumberAlgebraicForm(5,0);
+        macomparar[4][0] = NumeroComplejo.newComplexNumberAlgebraicForm(1,0);
+        macomparar[5][0] = NumeroComplejo.newComplexNumberAlgebraicForm(9,0);
+        MatrizCompleja comparar = new MatrizCompleja(macomparar);
+        assertTrue(matrizCom.multiply(X).equals(comparar));
+    }
 }
